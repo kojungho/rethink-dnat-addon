@@ -40,6 +40,8 @@ Open **Open Web UI**, then select the monitor button for the appliance you want 
 
 The capture stores time-aligned device-to-cloud and cloud-to-device packets, decoded protocol metadata, connection markers, and annotations. Files persist in the add-on data directory across restarts. Existing captures for that device are listed whenever its monitor page is opened.
 
+The message view has **All**, **Mapped**, and **Unmapped** filters. A packet is marked mapped when the device decoder recognizes at least one configured property in it; packets received but not recognized by the decoder are marked unmapped. Repeated recognized packets remain mapped even when their values have not changed. The same classification is stored in the capture JSONL as `mapped`.
+
 Use short, precise annotations such as `Auto Dry ON`, `Door opened`, or `Course changed from Auto to One Hour`. Change only one property between notes so later byte-offset comparisons remain unambiguous.
 
 Capturing is observational. The capture controls themselves do not send appliance commands; the existing raw packet injection controls remain separate and should not be used unless the packet is already understood.
