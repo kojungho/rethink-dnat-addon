@@ -42,6 +42,8 @@ The capture stores time-aligned device-to-cloud and cloud-to-device packets, dec
 
 The message view has **All**, **Mapped**, and **Unmapped** filters. A packet is marked mapped when the device decoder recognizes at least one configured property in it; packets received but not recognized by the decoder are marked unmapped. Repeated recognized packets remain mapped even when their values have not changed. The same classification is stored in the capture JSONL as `mapped`.
 
+After capture stops, its filename includes the UTC creation timestamp and the first annotation, for example `capture-<device>-20260824T085400123Z-Auto-Dry-on.jsonl`. Unsafe filename characters are replaced with hyphens. Use the **Delete** button next to a saved capture when it is no longer needed; active captures cannot be deleted.
+
 Use short, precise annotations such as `Auto Dry ON`, `Door opened`, or `Course changed from Auto to One Hour`. Change only one property between notes so later byte-offset comparisons remain unambiguous.
 
 Capturing is observational. The capture controls themselves do not send appliance commands; the existing raw packet injection controls remain separate and should not be used unless the packet is already understood.
