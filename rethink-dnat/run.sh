@@ -94,4 +94,7 @@ else
     echo "[INFO] MQTT auto-discovery is disabled; using manual MQTT options"
 fi
 echo "[INFO] Starting Rethink with MQTT server $mqtt_server"
+export RETHINK_CAPTURE_DIR=/data/captures
+mkdir -p "$RETHINK_CAPTURE_DIR"
+chmod 0700 "$RETHINK_CAPTURE_DIR"
 exec node /app/dist/rethink-cloud.js "$RUNTIME_CONFIG"

@@ -28,4 +28,20 @@ Bridge registration preserves the existing ThinQ account registration. ThinQ1 br
 
 The management interface is available from the add-on page through **Open Web UI**.
 
+## Mapping capture
+
+Open **Open Web UI**, then select the monitor button for the appliance you want to analyze. The **Mapping capture** card provides this workflow:
+
+1. Select **Start** before changing anything on the appliance.
+2. Operate one setting at a time on the physical appliance or in the LG app.
+3. Immediately enter an annotation describing the action and select **Add note**.
+4. Wait for the resulting packets, then repeat for the next setting.
+5. Select **Stop** and download the generated `.jsonl` file from the same card.
+
+The capture stores time-aligned device-to-cloud and cloud-to-device packets, decoded protocol metadata, connection markers, and annotations. Files persist in the add-on data directory across restarts. Existing captures for that device are listed whenever its monitor page is opened.
+
+Use short, precise annotations such as `Auto Dry ON`, `Door opened`, or `Course changed from Auto to One Hour`. Change only one property between notes so later byte-offset comparisons remain unambiguous.
+
+Capturing is observational. The capture controls themselves do not send appliance commands; the existing raw packet injection controls remain separate and should not be used unless the packet is already understood.
+
 Do not publish the appliance or management ports to the internet.
