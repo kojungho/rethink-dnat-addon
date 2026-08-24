@@ -4,8 +4,8 @@
 set -eu
 
 OPTIONS_FILE=/data/options.json
-RUNTIME_CONFIG=/data/config.json
-RUNTIME_CONFIG_TMP=/data/config.json.tmp
+RUNTIME_CONFIG=/config/config.json
+RUNTIME_CONFIG_TMP=/config/config.json.tmp
 
 if [ ! -f "$OPTIONS_FILE" ]; then
     echo "[ERROR] Home Assistant add-on options were not found" >&2
@@ -94,7 +94,7 @@ else
     echo "[INFO] MQTT auto-discovery is disabled; using manual MQTT options"
 fi
 echo "[INFO] Starting Rethink with MQTT server $mqtt_server"
-export RETHINK_CAPTURE_DIR=/data/captures
+export RETHINK_CAPTURE_DIR=/config/captures
 mkdir -p "$RETHINK_CAPTURE_DIR"
 chmod 0700 "$RETHINK_CAPTURE_DIR"
 exec node /app/dist/rethink-cloud.js "$RUNTIME_CONFIG"

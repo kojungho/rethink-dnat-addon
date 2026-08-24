@@ -28,6 +28,13 @@ Bridge registration preserves the existing ThinQ account registration. ThinQ1 br
 
 The management interface is available from the add-on page through **Open Web UI**.
 
+## App configuration files
+
+Home Assistant exposes this app's generated files at
+`/addon_configs/2111485b_rethink_dnat`. The runtime configuration is stored as
+`config.json`, and packet captures are stored in the `captures` directory. The
+runtime configuration can contain MQTT credentials, so do not share it.
+
 ## Mapping capture
 
 Open **Open Web UI**, then select the monitor button for the appliance you want to analyze. The **Mapping capture** card provides this workflow:
@@ -38,7 +45,7 @@ Open **Open Web UI**, then select the monitor button for the appliance you want 
 4. Wait for the resulting packets, then repeat for the next setting.
 5. Select **Stop** and download the generated `.jsonl` file from the same card.
 
-The capture stores time-aligned device-to-cloud and cloud-to-device packets, decoded protocol metadata, connection markers, and annotations. Files persist in the add-on data directory across restarts. Existing captures for that device are listed whenever its monitor page is opened.
+The capture stores time-aligned device-to-cloud and cloud-to-device packets, decoded protocol metadata, connection markers, and annotations. Files persist in `/addon_configs/2111485b_rethink_dnat/captures` across restarts. Existing captures for that device are listed whenever its monitor page is opened.
 
 The message view has **All**, **Mapped**, and **Unmapped** filters. A packet is marked mapped when the device decoder recognizes at least one configured property in it; packets received but not recognized by the decoder are marked unmapped. Repeated recognized packets remain mapped even when their values have not changed. The same classification is stored in the capture JSONL as `mapped`.
 

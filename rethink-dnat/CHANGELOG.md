@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.52
+
+### Added
+
+- `HWWA9XC_F2U` 스틱청소기와 검증된 설정 항목을 Home Assistant에 매핑합니다.
+- 생성된 실행 설정과 패킷 캡처를 `/addon_configs/2111485b_rethink_dnat`에서 확인할 수 있습니다.
+
 ## 0.1.51
 
 ### Added
