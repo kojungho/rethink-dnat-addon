@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.49
+
+### Fixed
+
+- 기존 MQTT 엔티티에 워시타워 Configuration 분류가 적용되도록 설정 제어 5개를 같은 고유 ID로 안전하게 재등록합니다.
+
 ## 0.1.48
 
 ### Fixed
