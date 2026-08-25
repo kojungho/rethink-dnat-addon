@@ -4,7 +4,7 @@ FROM alpine:3.20 AS build
 
 # Pinning the source revision makes Docker invalidate the remote-archive layer
 # when the add-on is rebuilt after a source update.
-ARG RETHINK_REF=d05034f3ccc0beb17a9c7396cd43d01a3619b878
+ARG RETHINK_REF=5425da2ac536aa11091c822eb34cd5070961570a
 # Keep this immutable so Home Assistant always builds the reviewed DNAT source.
 
 WORKDIR /src
