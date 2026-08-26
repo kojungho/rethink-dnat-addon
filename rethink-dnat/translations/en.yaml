@@ -14,12 +14,21 @@ configuration:
     mqtt_password:
         name: Manual MQTT password
         description: Fallback password used to connect to the MQTT broker.
-        discovery_prefix:
-            name: Discovery prefix
-            description: Home Assistant MQTT discovery topic prefix.
-        rethink_prefix:
-            name: Rethink prefix
-            description: MQTT topic prefix used by Rethink.
+    discovery_prefix:
+        name: Discovery prefix
+        description: Home Assistant MQTT discovery topic prefix.
+    rethink_prefix:
+        name: Rethink prefix
+        description: MQTT topic prefix used by Rethink.
+    thinq_pat:
+        name: ThinQ Connect PAT
+        description: PAT used to read today's energy usage from the official ThinQ Connect API. Leave blank to disable cloud history.
+    thinq_country:
+        name: ThinQ country code
+        description: Country code of the ThinQ account that issued the PAT.
+    thinq_poll_minutes:
+        name: ThinQ history polling interval
+        description: Number of minutes between official ThinQ Connect usage queries.
 network:
     443/tcp: ThinQ 2 HTTPS endpoint
     8883/tcp: ThinQ 2 secure MQTT endpoint

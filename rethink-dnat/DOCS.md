@@ -9,8 +9,19 @@
 - `mqtt_password`: Manual fallback MQTT password.
 - `discovery_prefix`: Home Assistant MQTT discovery prefix.
 - `rethink_prefix`: MQTT topic prefix used by Rethink.
+- `thinq_pat`: Personal Access Token from ThinQ Connect. When configured, Rethink performs read-only usage queries; the token is never published to MQTT or logs.
+- `thinq_country`: ThinQ account country code. Use `KR` for a Korean account.
+- `thinq_poll_minutes`: Read-only ThinQ Connect history polling interval. The minimum is 15 minutes.
 
 When automatic discovery is enabled and an MQTT service is available, the discovered values take precedence. If discovery fails, Rethink uses the manual MQTT options. Disable automatic discovery to always use the manual values.
+
+## Refrigerator daily statistics
+
+- **Clean deodorizing filter status** is decoded locally from the refrigerator PAC state and keeps English raw MQTT values with Korean Home Assistant display text.
+- **Today's energy usage** is read from the official ThinQ Connect `energyUsage` history API when `thinq_pat` is configured. It is read-only and does not control the appliance.
+- **Today's door-open count** and **Today's door-open time** are accumulated from locally observed PAC door events. These counters persist in the add-on configuration directory and reset at midnight in Asia/Seoul.
+
+The public ThinQ Connect profile does not provide daily water usage, ice usage, or the app's historical door statistics for this refrigerator. Rethink therefore does not create guessed sensors for those values.
 
 ## DNAT network mode
 

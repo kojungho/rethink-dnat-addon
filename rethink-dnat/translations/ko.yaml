@@ -14,12 +14,21 @@ configuration:
     mqtt_password:
         name: 수동 MQTT 비밀번호
         description: 자동 검색 실패 시 MQTT 브로커 접속에 사용할 비밀번호입니다.
-        discovery_prefix:
-            name: 검색 접두사
-            description: Home Assistant MQTT 검색 토픽의 접두사입니다.
-        rethink_prefix:
-            name: Rethink 접두사
-            description: Rethink가 사용할 MQTT 토픽 접두사입니다.
+    discovery_prefix:
+        name: 검색 접두사
+        description: Home Assistant MQTT 검색 토픽의 접두사입니다.
+    rethink_prefix:
+        name: Rethink 접두사
+        description: Rethink가 사용할 MQTT 토픽 접두사입니다.
+    thinq_pat:
+        name: ThinQ Connect PAT
+        description: 공식 ThinQ Connect에서 오늘 전력 사용량을 읽을 때 사용하는 PAT입니다. 비워두면 클라우드 이력 조회가 꺼집니다.
+    thinq_country:
+        name: ThinQ 국가 코드
+        description: PAT를 발급한 ThinQ 계정의 국가 코드입니다.
+    thinq_poll_minutes:
+        name: ThinQ 이력 조회 주기
+        description: 공식 ThinQ Connect 사용량 API를 다시 읽는 간격(분)입니다.
 network:
     443/tcp: ThinQ 2 HTTPS 엔드포인트
     8883/tcp: ThinQ 2 보안 MQTT 엔드포인트

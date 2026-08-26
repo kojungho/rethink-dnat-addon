@@ -19,6 +19,9 @@ mqtt_username="$(jq -er '.mqtt_username' "$OPTIONS_FILE")"
 mqtt_password="$(jq -er '.mqtt_password' "$OPTIONS_FILE")"
 discovery_prefix="$(jq -er '.discovery_prefix' "$OPTIONS_FILE")"
 rethink_prefix="$(jq -er '.rethink_prefix' "$OPTIONS_FILE")"
+thinq_pat="$(jq -er '.thinq_pat // ""' "$OPTIONS_FILE")"
+thinq_country="$(jq -er '.thinq_country // "KR"' "$OPTIONS_FILE")"
+thinq_poll_minutes="$(jq -er '.thinq_poll_minutes // 60' "$OPTIONS_FILE")"
 
 mqtt_source=manual
 if [ "$mqtt_auto_discovery" = "true" ] && [ -n "${SUPERVISOR_TOKEN:-}" ]; then
@@ -61,7 +64,10 @@ jq -n \
     --arg mqtt_password "$mqtt_password" \
     --arg discovery_prefix "$discovery_prefix" \
     --arg rethink_prefix "$rethink_prefix" \
-    '{
+    --arg thinq_pat "$thinq_pat" \
+    --arg thinq_country "$thinq_country" \
+    --argjson thinq_poll_minutes "$thinq_poll_minutes" \
+    '({
         hostname: $hostname,
         homeassistant: {
             mqtt_url: $mqtt_server,
@@ -81,7 +87,16 @@ jq -n \
         bridge: { storage_path: "state" },
         dnat: { enabled: true, dns_servers: ["1.1.1.1", "8.8.8.8"] },
         log: ["status", "incoming", "HTTPS", "publish", "MGMT"]
-    }' > "$RUNTIME_CONFIG_TMP"
+    } + if $thinq_pat == "" then {} else {
+        thinq_connect: {
+            access_token: $thinq_pat,
+            country_code: $thinq_country,
+            client_id: "00000000-0000-4000-8000-000000211148",
+            poll_minutes: $thinq_poll_minutes,
+            timezone: "Asia/Seoul",
+            refrigerator_model: "2REFO2DJC4K_U"
+        }
+    } end)' > "$RUNTIME_CONFIG_TMP"
 
 chmod 0600 "$RUNTIME_CONFIG_TMP"
 mv "$RUNTIME_CONFIG_TMP" "$RUNTIME_CONFIG"
@@ -95,6 +110,9 @@ else
 fi
 echo "[INFO] Starting Rethink with MQTT server $mqtt_server"
 export RETHINK_CAPTURE_DIR=/config/captures
+export RETHINK_STATE_DIR=/config/state
 mkdir -p "$RETHINK_CAPTURE_DIR"
 chmod 0700 "$RETHINK_CAPTURE_DIR"
+mkdir -p "$RETHINK_STATE_DIR"
+chmod 0700 "$RETHINK_STATE_DIR"
 exec node /app/dist/rethink-cloud.js "$RUNTIME_CONFIG"
