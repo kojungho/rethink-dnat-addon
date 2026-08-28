@@ -1,5 +1,5 @@
 name: Rethink DNAT
-version: "0.1.91"
+version: "0.1.92"
 slug: rethink_dnat
 description: Local LG ThinQ cloud replacement with Home Assistant MQTT discovery
 url: https://github.com/kojungho/rethink
