@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.93
+
+- Match the local `airclean` and `sleeptimer` component names so PAT-Cloud no longer keeps duplicate air-clean and sleep-timer entities.
+
 ## 0.1.92
 
 - 실제 로컬 패킷 컴포넌트가 있는 값은 해당 로컬 엔티티만 사용하고 중복 PAT-Cloud 센서를 정리합니다.
