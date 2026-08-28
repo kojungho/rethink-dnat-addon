@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.94
+
+- PAC 대기화면 또는 시계 관련 설정을 바꾼 뒤 750ms 후 현재 시각을 한 번만 다시 동기화합니다.
+- 화면이나 시계가 꺼져 있으면 예약된 동기화를 취소해 불필요한 시간 패킷을 보내지 않습니다.
+
 ## 0.1.93
 
 - Match the local `airclean` and `sleeptimer` component names so PAT-Cloud no longer keeps duplicate air-clean and sleep-timer entities.
